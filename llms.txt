@@ -1,0 +1,36 @@
+# enforcer-checkfile-rules
+
+> Custom Maven Enforcer Plugin rules for validating file contents and file existence via glob patterns.
+
+Key facts:
+- Java 21, single-module Maven project (Maven 3.9.4 with Maven Wrapper)
+- Extends Maven Enforcer API 3.3.0 with two custom rules
+- CI-friendly `${revision}` versioning via flatten-maven-plugin
+- Tested exclusively through maven-invoker-plugin integration tests (no unit tests)
+- License: Apache License 2.0
+
+## Docs
+
+- [README.md](README.md): Project overview, rule reference with parameters, and usage examples
+- [AGENTS.md](AGENTS.md): Developer guide with build commands, directory structure, and coding conventions
+- [CONTRIBUTING.md](CONTRIBUTING.md): Contribution guidelines
+- [.github/CIFLOW.md](.github/CIFLOW.md): CI/CD pipeline and branching strategy
+
+## Source
+
+- [src/main/java/org/apache/maven/plugins/enforcer/RequireFilesContent.java](src/main/java/org/apache/maven/plugins/enforcer/RequireFilesContent.java): Rule that checks files contain a specific string (line-by-line `contains()` check)
+- [src/main/java/org/apache/maven/plugins/enforcer/RequireGlobMatches.java](src/main/java/org/apache/maven/plugins/enforcer/RequireGlobMatches.java): Rule that checks glob patterns match at least one file under a root location
+- [src/main/java/org/apache/maven/plugins/enforcer/package-info.java](src/main/java/org/apache/maven/plugins/enforcer/package-info.java): Package docs explaining the naming convention for Maven Enforcer auto-discovery
+
+## Integration Tests
+
+- [src/it/settings.xml](src/it/settings.xml): Shared Maven settings for invoker test scenarios
+- [src/it/RequireFilesContent](src/it/RequireFilesContent): Four test scenarios for file content checking (content-found, content-not-found, content-not-specified, file-not-exist)
+- [src/it/RequireGlobMatches](src/it/RequireGlobMatches): Two test scenarios for glob matching (glob-matches, glob-not-matches)
+
+## Optional
+
+- [pom.xml](pom.xml): Maven build configuration with CI-friendly versioning and release profiles
+- [.github/workflows/build.yml](.github/workflows/build.yml): CI build workflow
+- [LICENSE.txt](LICENSE.txt): Apache License 2.0 text
+- [logback-test.xml](logback-test.xml): Test logging configuration
